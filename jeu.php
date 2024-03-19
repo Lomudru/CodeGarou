@@ -13,9 +13,8 @@
                 ":code" => $_GET["code"],
             ]);
             $verif_partie = $pdoStatement->fetch();
-            if($verif_partie == false || $verif_partie->room_code == NULL): ?>
-                <p>Ce code est incorrect</p>
-            <?php 
+            if($verif_partie == false || $verif_partie->room_code == NULL):
+                header("Location: ".PROJECT_FOLDER."jouer.php?error=code");
             elseif($verif_partie->room_en_jeu == 1):
                 header("Location: ".PROJECT_FOLDER."jouer.php");
             else:
@@ -39,6 +38,8 @@
     ?>
     <main>
         <div id="listPlayer"></div>
+        <div id="chat"></div>
+        <input type="text" placeholder="Message" name="chatBox" id="chatBox">
         <a href="<?= PROJECT_FOLDER ?>jouer.php">Quitter</a>
     </main>
     <?php require SITE_ROOT . "partials/footer.php" ?>

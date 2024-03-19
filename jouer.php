@@ -13,6 +13,9 @@ if(isset($_GET["code"])){
 <body>
     <?php require SITE_ROOT . "partials/header.php" ?>
     <main>
+        <?php if(isset($_GET["error"])): ?>
+            <p>Le code est inccorect</p>
+        <?php endif; ?>
         <form action="<?= PROJECT_FOLDER?>action/createRoom.php" method="POST">
             <label for="nom">Nom:</label>
             <input type="text" name="nom" id="nom" value="<?= $_SESSION["user_pseudo"]?>'s game">
@@ -24,11 +27,10 @@ if(isset($_GET["code"])){
             <input type="number" name="nbr_joueur_max" id="nbr_joueur_max" value=11 min=4 max=30>
             <button type="submit">Générer</button>
         </form>
-        <div id="allRoom"></div>
         <form action="jouer.php" id="search" method="get">
             <input type="text" name="code" id="code" placeholder="code">
-            <input type="submit" value="Rejoindre">
         </form>
+        <div id="allRoom"></div>
     </main>
     <?php require SITE_ROOT . "partials/footer.php" ?>
     <script src="<?= PROJECT_FOLDER ?>assets/js/room.js"></script>
