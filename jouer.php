@@ -1,11 +1,18 @@
-<?php require "utils/common.php" ?>
+<?php 
+require "utils/common.php";
+if(!isset($_SESSION["user_id"])){
+    header("Location: ".PROJECT_FOLDER."index.php");
+}
+if(isset($_GET["code"])){
+    header("Location: ".PROJECT_FOLDER."jeu.php?code=".$_GET["code"]);
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <?php require SITE_ROOT . "partials/head.php" ?>
 <body>
     <?php require SITE_ROOT . "partials/header.php" ?>
     <main>
-
         <form action="<?= PROJECT_FOLDER?>action/createRoom.php" method="POST">
             <label for="nom">Nom:</label>
             <input type="text" name="nom" id="nom" value="<?= $_SESSION["user_pseudo"]?>'s game">
@@ -18,6 +25,10 @@
             <button type="submit">Générer</button>
         </form>
         <div id="allRoom"></div>
+        <form action="jouer.php" id="search" method="get">
+            <input type="text" name="code" id="code" placeholder="code">
+            <input type="submit" value="Rejoindre">
+        </form>
     </main>
     <?php require SITE_ROOT . "partials/footer.php" ?>
     <script src="<?= PROJECT_FOLDER ?>assets/js/room.js"></script>

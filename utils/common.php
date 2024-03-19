@@ -7,6 +7,6 @@ define('PROJECT_FOLDER', '/CodeGarou/');
 define('SITE_ROOT', $_SERVER['DOCUMENT_ROOT'] . PROJECT_FOLDER); 
 
 session_start();
-require_once SITE_ROOT . "utils/database.php"
+require_once SITE_ROOT . "utils/database.php";
 
 ?>

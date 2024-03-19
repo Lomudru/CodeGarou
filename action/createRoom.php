@@ -28,12 +28,7 @@ if (!empty($_POST)){
         ":visible" => $_POST["visibilite"],
         ":nbr_max" => $_POST["nbr_joueur_max"],
     ]);
-    $pdoStatement = $pdo->prepare("INSERT INTO partie VALUE (:code,:id_joueur,1,1)");
-    $pdoStatement->execute([
-        ":code" => $code,
-        ":id_joueur" => $_SESSION["user_id"],
-    ]);
-    header("Location: ".PROJECT_FOLDER."jouer.php");
+    header("Location: ".PROJECT_FOLDER."jeu.php?code=". $code);
 }else{
     header("Location: ".PROJECT_FOLDER."jouer.php");
 }
