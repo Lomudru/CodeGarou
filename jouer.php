@@ -33,6 +33,7 @@ if(isset($_GET["code"])){
         <div id="allRoom"></div>
     </main>
     <?php require SITE_ROOT . "partials/footer.php" ?>
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
     <script src="<?= PROJECT_FOLDER ?>assets/js/room.js"></script>
 </body>
 </html>
