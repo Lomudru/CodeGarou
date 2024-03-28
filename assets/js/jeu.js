@@ -47,26 +47,29 @@ if(msg != null){
         }
     });
 }
-if(lauch != null){
-    lauch.addEventListener("click", ()=>{
-        if(allPlayer.childNodes.length >= 4 && allPlayer.childNodes.length <= 30){
-            let xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("get","action/jeu.php?key=cnuhdiaj3EJDHZIUAHIZ46826388634IE3886483&code="+code.innerText,true);
-            xmlhttp.onreadystatechange = function(){
-                if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
-                    let reponse = JSON.parse(this.response);
-                }
-            }
-            xmlhttp.send();
-        }
-    });
-}
 // Enable pusher logging - don't include this in production
 Pusher.logToConsole = true;
 
 let pusher = new Pusher('e39c485e91fd48c1c3e7', {
 cluster: 'eu'
 });
+if(lauch != null){
+    lauch.addEventListener("click", ()=>{
+        if(allPlayer.childNodes.length >= 4 && allPlayer.childNodes.length <= 30){
+            lauch.remove();
+            let xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("get","action/jeu.php?key=cnuhdiaj3EJDHZIUAHIZ46826388634IE3886483&code="+code.innerText,true);
+            xmlhttp.send();
+        }
+    });
+    let channelGame = pusher.subscribe(code.innerText);
+    channelGame.bind('launch', function(data) {
+        if(data["delete"] != undefined){
+            lauch.remove();
+        }
+    });
+}
+
 
 let channelChat = pusher.subscribe(code.innerText);
 channelChat.bind('chat', function(data) {

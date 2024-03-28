@@ -1,13 +1,9 @@
 <?php
 require "../utils/common.php";
+require "../utils/functions.php";
 
 if(!empty($_POST)){
-    $pdo = connectToDbAndGetPdo();
-    $pdoStatement = $pdo->prepare("SELECT * FROM joueur WHERE joueur_pseudo = :pseudo");
-    $pdoStatement->execute([
-        ":pseudo" => $_POST['pseudo'],
-    ]);
-    $joueur = $pdoStatement->fetch();
+    $joueur = Select_Joueur(false,$_POST['pseudo'])[0];
     if ($joueur != false) {
         if (password_verify($_POST["mdp"], $joueur->joueur_mdp)){
             $_SESSION["user_id"]= $joueur->joueur_id;

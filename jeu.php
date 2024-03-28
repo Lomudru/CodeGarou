@@ -1,6 +1,7 @@
 <?php 
 require "utils/common.php";
 require 'vendor/autoload.php';
+require "utils/functions.php";
 $options = array(
     'cluster' => 'eu',
     'useTLS' => true
@@ -30,17 +31,9 @@ $spectator = false;
             if($verif_partie == false || $verif_partie->room_code == NULL):
                 header("Location: ".PROJECT_FOLDER."jouer.php?error=code");
             elseif(!$verif_partie->room_en_jeu == 1):
-                $pdoStatement = $pdo->prepare("SELECT joueur_id FROM partie WHERE joueur_id = :id");
-                $pdoStatement->execute([
-                    ":id" => $_SESSION["user_id"],
-                ]);
-                $verif_id = $pdoStatement->fetch();
+                $verif_id = Select_Partie(false,$_SESSION["user_id"]);
                 if($verif_id == false && $verif_partie->nbr_actuel < $verif_partie->room_nbr_max){
-                    $pdoStatement = $pdo->prepare("INSERT INTO partie VALUE (:code,:id_joueur,1,1)");
-                    $pdoStatement->execute([
-                        ":code" => $verif_partie->room_code,
-                        ":id_joueur" => $_SESSION["user_id"],
-                    ]);
+                    Insert_Partie($verif_partie->room_code,$_SESSION["user_id"]);
                     $data['user_pseudo'] = $_SESSION["user_pseudo"];
                     $pusher->trigger($verif_partie->room_code, 'player', $data);
                     $_SESSION["last_room_code"] = $verif_partie->room_code;
@@ -51,22 +44,12 @@ $spectator = false;
         header("Location: ".PROJECT_FOLDER."jouer.php");
     endif;
     ?>
-    <?php 
-    $pdo = connectToDbAndGetPdo();
-    $pdoStatement = $pdo->prepare("SELECT * FROM partie WHERE room_code = :code AND joueur_id = :id");
-    $pdoStatement->execute([
-        ":code" => $_GET["code"],
-        ":id" => $_SESSION["user_id"]
-    ]);
-    $result = $pdoStatement->fetchAll();
+    <?php
+    $result = Select_Partie($_GET["code"],$_SESSION["user_id"]);
     if ($result != false){
         $spectator = true;
     }
-    $pdoStatement = $pdo->prepare("SELECT room_en_jeu FROM room WHERE room_code = :code");
-    $pdoStatement->execute([
-        ":code" => $_GET["code"]
-    ]);
-    $en_jeu = $pdoStatement->fetch();
+    $en_jeu = Select_Room(false,$_GET["code"])[0];
 
     ?>
     <main>
@@ -84,6 +67,9 @@ $spectator = false;
         <a href="<?= PROJECT_FOLDER ?>jouer.php">Quitter</a>
     </main>
     <script src="<?= PROJECT_FOLDER ?>assets/js/jeu.js"></script>
+    <script>
+        let sessionId = <?= $_SESSION["user_id"]; ?>;
+    </script>
     <script src="<?= PROJECT_FOLDER ?>assets/js/codeGarou.js"></script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 <?php
 require "../utils/common.php";
+require "../utils/functions.php";
 require '../vendor/autoload.php';
 $options = array(
     'cluster' => 'eu',
@@ -22,13 +23,7 @@ if(isset($_GET["key"]) && $_GET["key"] == "cnuhdiaj3EJDHZIUAHIZ46826388634IE3886
     $result = $pdoStatement->fetchAll();
     echo json_encode($result);
 }elseif(isset($_GET["key"]) && $_GET["key"] == "cnuhdiaj3EJDHZIUAHIZ46826388634IE3886483" && isset($_GET["code"]) && isset($_GET["post"])){
-    $pdo = connectToDbAndGetPdo();
-    $pdoStatement = $pdo->prepare("INSERT INTO chat(room_code, joueur_id, chat_msg) VALUES (:code, :id, :msg)");
-    $pdoStatement->execute([
-        ":code" => $_GET["code"],
-        ":id" => $_SESSION["user_id"],
-        ":msg" => $_GET["post"]
-    ]);
+    Insert_Chat($_GET["code"], $_SESSION["user_id"], $_GET["post"]);
     $data['message'] = $_GET["post"];
     $data['user_pseudo'] = $_SESSION["user_pseudo"];
     $pusher->trigger($_GET["code"], 'chat', $data);
