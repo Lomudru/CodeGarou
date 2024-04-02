@@ -50,6 +50,8 @@ $spectator = false;
         $spectator = true;
     }
     $en_jeu = Select_Room(false,$_GET["code"])[0];
+    
+
 
     ?>
     <main>

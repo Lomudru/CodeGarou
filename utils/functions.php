@@ -141,8 +141,6 @@ function Update_Partie($room_code = false, $joueur_id = false, $role_id = false,
     $pdo = connectToDbAndGetPdo();
     $pdoStatement = $pdo->prepare("UPDATE partie SET $query WHERE $query_requete");
     $pdoStatement->execute($params);
-    var_dump($pdoStatement->debugDumpParams());
-    var_dump($pdoStatement->errorInfo());
 }
 function Delete_Partie($room_code = false, $joueur_id = false, $role_id = false, $en_vie = false){
     // Prepare query
@@ -431,6 +429,7 @@ function Prochain_role($room){
         "SELECT P.role_id AS role_suivant FROM partie AS P
         INNER JOIN role AS R ON P.role_id = R.role_id
         WHERE P.room_code = :code
+        AND P.en_vie = 1
         AND R.role_ordre > (
             SELECT R.role_ordre FROM role AS R
             INNER JOIN room AS M ON R.role_id = M.room_id_role_actuelle
@@ -475,5 +474,19 @@ function faire_mourir($room, $action, $tour){
         return $areturn;
     }else{
         return false;
+    }
+}
+
+function victoire($room){
+    $pdo = connectToDbAndGetPdo();
+    $pdoStatement = $pdo->prepare("SELECT R.role_camp FROM partie AS P INNER JOIN role AS R ON P.role_id = R.role_id WHERE P.room_code = :code AND P.en_vie = 1 GROUP BY R.role_camp;");
+    $pdoStatement->execute([
+        ":code" => $room
+    ]);
+    $areturn = $pdoStatement->fetchall();
+    if(count($areturn) > 1){
+        return false;
+    }else{
+        return $areturn[0];
     }
 }

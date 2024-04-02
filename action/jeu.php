@@ -19,7 +19,7 @@ if(isset($_GET["key"]) && $_GET["key"] == "cnuhdiaj3EJDHZIUAHIZ46826388634IE3886
     foreach($result as $row){
         array_push($villagois ,$row);
     }
-    for ($i=0; $i < intval(round(sizeof($result)/1,  $precision = 0)); $i++){
+    for ($i=0; $i < intval(round(sizeof($result)/4,  $precision = 0)); $i++){
         $id_loup_garou = $result[random_int(0,sizeof($result)-1)];
         if(!in_array($id_loup_garou, $alreadyLG)){
             Update_Partie(false,false,2,false,false,$id_loup_garou->joueur_id);
