@@ -10,26 +10,39 @@ if(isset($_GET["code"])){
 <!DOCTYPE html>
 <html lang="fr">
 <?php require SITE_ROOT . "partials/head.php" ?>
+<link rel="stylesheet" href="assets/css/jouer.css">
+<link rel="stylesheet" href="assets/css/normalize.css">
 <body>
     <?php require SITE_ROOT . "partials/header.php" ?>
     <main>
         <?php if(isset($_GET["error"])): ?>
-            <p>Le code est inccorect</p>
+            <p class="codeInccorect">Le code est inccorect</p>
         <?php endif; ?>
-        <form action="<?= PROJECT_FOLDER?>action/createRoom.php" method="POST">
-            <label for="nom">Nom:</label>
-            <input type="text" name="nom" id="nom" value="<?= $_SESSION["user_pseudo"]?>'s game">
-            <label for="public">Public:</label>
-            <input type="radio" name="visibilite" id="public" value=1 checked>
-            <label for="prive">Privé:</label>
-            <input type="radio" name="visibilite" id="prive" value=0>
-            <label for="nbr_joueur_max">Nombre de joueur max:</label>
-            <input type="number" name="nbr_joueur_max" id="nbr_joueur_max" value=11 min=4 max=30>
-            <button type="submit">Générer</button>
-        </form>
-        <form action="jouer.php" id="search" method="get">
-            <input type="text" name="code" id="code" placeholder="code">
-        </form>
+        <div id="formall">
+            <div class="form" id="creationRoom">
+                <form action="<?= PROJECT_FOLDER?>action/createRoom.php" method="POST">
+                    <label for="nom">Nom de la room : </label>
+                    <input type="text" name="nom" id="nom" value="<?= $_SESSION["user_pseudo"]?>'s game">
+                    <p>Visibilité :</p>
+                    <p class="visible">
+                        <label for="public">Public:</label>
+                        <input type="radio" name="visibilite" id="public" value=1 checked></p>
+                    <p class="visible">
+                        <label for="prive">Privé:</label>
+                        <input type="radio" name="visibilite" id="prive" value=0>
+                    </p>
+                    <label for="nbr_joueur_max">Nombre de joueur max:</label>
+                    <input type="number" name="nbr_joueur_max" id="nbr_joueur_max" value=11 min=4 max=30>
+                    <button type="submit" class="button">Générer</button>
+                </form>
+            </div>
+            <div class="form" id="rejoindreRoom">
+                <form action="jouer.php" id="search" method="get">
+                    <label for="code">Rejoindre une room avec son code :</label>
+                    <input type="text" name="code" id="code" placeholder="code">
+                </form>
+            </div>
+        </div>
         <div id="allRoom"></div>
     </main>
     <?php require SITE_ROOT . "partials/footer.php" ?>
