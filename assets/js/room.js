@@ -31,7 +31,7 @@ channelRoom.bind('room', function(data) {
     if(data["delete"] != undefined){
         for(let i = 0; i < allRoom.childNodes.length; i++){
             if(allRoom.childNodes[i].id == data["room_code"]){
-                allRoom.childNodes[i].innerHTML = "";
+                allRoom.childNodes[i].remove();
             }
         }
     }

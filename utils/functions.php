@@ -148,8 +148,8 @@ function Delete_Partie($room_code = false, $joueur_id = false, $role_id = false,
     $params = [];
     if( $room_code ) $params['room_code'] = $room_code;
     if( $joueur_id ) $params['joueur_id'] = $joueur_id;
-    if( $chat_msg ) $params['chat_msg'] = $chat_msg;
-    if( $chat_type ) $params['chat_type'] = $chat_type;
+    if( $role_id ) $params['chat_msg'] = $role_id;
+    if( $en_vie ) $params['chat_type'] = $en_vie;
     
     foreach($params as $key => $param):
         $query .= "$key = :$key AND ";
