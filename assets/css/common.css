@@ -19,13 +19,13 @@ body {
     background-color: rgb(10, 46, 72);
 }
 
-#acceuil {
+.main {
     display: flex;
     align-items: center;
     flex-direction: column;
 }
 
-#description{
+.cadre{
     font-size: x-large;
     margin: 50px;
     background-color: rgb(217, 217, 217);
@@ -36,8 +36,39 @@ body {
     text-decoration: none;
 }
 
+.cadre {
+    font-size: x-large;
+    margin: 50px;
+    background-color: rgb(217, 217, 217);
+    opacity: 0.75;
+    padding: 10px 10px;
+    border-radius: 10px;
+    color: black;
+    text-decoration: none;
+    border: 1px solid #cccccc;
+    text-align: center;
+}
+
+.compte .cadre{
+    padding: 30px 200px;
+}
+
+.cadre input{
+    width: 100%; /* Remplir toute la largeur disponible */
+    padding: 10px; /* Espacement intérieur */
+    margin-bottom: 10px; /* Espacement entre les éléments */
+    box-sizing: border-box; /* Inclure la bordure et le padding dans la largeur */
+}
+
+.cadre label {
+    display: block;
+    text-align: left;
+}
+
+
 #jouer {
     margin: 0 auto;
+    border-radius: 10px;
     font-size:x-large;
     background-color: rgb(255, 184, 0); /* Couleur de fond */
     padding: 9px 30px; /* Ajoutez un peu de rembourrage pour l'espace autour du texte */
@@ -68,11 +99,11 @@ footer {
 }
 
 .button {
-    background-color: rgb(117, 84, 132);
-    padding: 5px 10px;
-    border-radius: 5px;
+    background-color: #755484;
+    padding: 10px;
+    border-radius: 25px;
     color: white;
-    text-decoration: none;
+    border: 0;
 }
 
 .button:hover {

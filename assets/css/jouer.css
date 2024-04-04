@@ -32,12 +32,6 @@ html{
 #rejoindreRoom{
     width: 40%;
 }
-.button{
-    background-color: #755484;
-    border-radius: 10px;
-    color: white;
-    border: 0;
-}
 #allRoom{
     background-color: #D9D9D975;
     margin-top: 5vw;

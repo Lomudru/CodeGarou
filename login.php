@@ -9,7 +9,7 @@ if(isset($_SESSION["user_id"])){
 <?php require SITE_ROOT . "partials/head.php" ?>
 <body class="compte">
     <?php require SITE_ROOT . "partials/header.php" ?>
-    <main>
+    <main class="main">
         <?php
         if (isset( $_GET['error'] )) {
             if ($_GET['error'] == "inexistant") {
@@ -24,7 +24,7 @@ if(isset($_SESSION["user_id"])){
             }
         }
         ?>
-        <form action="<?= PROJECT_FOLDER ?>action/login.php" method="post">
+        <form action="<?= PROJECT_FOLDER ?>action/login.php" method="post" class="cadre">
         <label for="pseudo">pseudo :</label>
         <input type="text" name="pseudo" id="pseudo">
         <label for="mdp">mdp :</label>
