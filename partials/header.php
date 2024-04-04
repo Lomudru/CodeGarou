@@ -20,9 +20,13 @@
         ]);
         $pseudo = $pdoStatement->fetch(); ?>
         <h1>Bonjour <?= $pseudo->joueur_pseudo ?></h1>
-        <a href="<?= PROJECT_FOLDER ?>action/disconnect.php">Se deconnecter</a>
+        <a href="<?= PROJECT_FOLDER ?>action/disconnect.php" class="button">Se déconnecter</a>
     <?php }else{ ?>
-        <h1>header</h1>
+        <h1>CodeGarou</h1>
+        <div>
+            <a href="<?= PROJECT_FOLDER ?>register.php" class="button">register</a>
+            <a href="<?= PROJECT_FOLDER ?>login.php" class="button">login</a>
+        </div>
     <?php } ?>
     <?php 
     if(isset($_SESSION["user_id"]) && $_SERVER['PHP_SELF'] != "/CodeGarou/jeu.php"  && $_SERVER['PHP_SELF'] != "/CodeGarou/action/createRoom.php"){

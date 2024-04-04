@@ -7,7 +7,7 @@ if(isset($_SESSION["user_id"])){
 <!DOCTYPE html>
 <html lang="fr">
 <?php require SITE_ROOT . "partials/head.php" ?>
-<body>
+<body class="compte">
     <?php require SITE_ROOT . "partials/header.php" ?>
     <main>
         <?php 
@@ -19,7 +19,7 @@ if(isset($_SESSION["user_id"])){
             <input type="text" name="pseudo" id="pseudo">
             <label for="mdp">mdp :</label>
             <input type="password"  name="mdp" id="mdp">
-            <input type="submit" value="s'inscrire">
+            <input type="submit" value="s'inscrire" class="button">
         </form>
     </main>
     <?php require SITE_ROOT . "partials/footer.php" ?>

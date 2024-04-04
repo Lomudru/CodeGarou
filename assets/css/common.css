@@ -1,0 +1,80 @@
+/*HEADER*/
+
+header {
+    background-color: rgb(18, 86, 135);
+    background: linear-gradient(rgb(18, 86, 135), rgba(18, 86, 135), rgba(18, 86, 135), rgba(18, 86, 135, 0));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    padding-bottom: 20px;
+    margin-bottom: 50px;
+}
+
+body {
+    height: 100%;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(10, 46, 72);
+}
+
+main {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#description{
+    font-size: x-large;
+    margin: 50px;
+    background-color: rgb(217, 217, 217);
+    opacity: 0.75;
+    padding: 10px 10px;
+    border-radius: 10px;
+    color: black;
+    text-decoration: none;
+}
+
+#jouer {
+    margin: 0 auto;
+    font-size:x-large;
+    background-color: rgb(255, 184, 0); /* Couleur de fond */
+    padding: 9px 30px; /* Ajoutez un peu de rembourrage pour l'espace autour du texte */
+}
+
+
+#jouer:hover {
+    font-size:x-large;
+    background-color: rgb(234, 148, 0); /* Couleur de fond */
+    padding: 9px 30px; /* Ajoutez un peu de rembourrage pour l'espace autour du texte */
+}
+
+footer {
+    position: inherit;
+    bottom: auto;
+    background-color: rgb(18, 86, 135);
+    background: linear-gradient(rgb(18, 86, 135, 0), rgb(7,34,54), rgba(7,34,54), rgba(7,34,54));
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.compte footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.button {
+    background-color: rgb(117, 84, 132);
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+}
+
+.button:hover {
+    background-color: rgba(117, 84, 132, 0.8); /* Changement de couleur au survol */
+}
