@@ -19,7 +19,7 @@ body {
     background-color: rgb(10, 46, 72);
 }
 
-main {
+#acceuil {
     display: flex;
     align-items: center;
     flex-direction: column;

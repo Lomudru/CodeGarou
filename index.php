@@ -4,7 +4,7 @@
 <?php require SITE_ROOT . "partials/head.php" ?>
 <body>
     <?php require SITE_ROOT . "partials/header.php" ?>
-    <main>
+    <main id="acceuil">
         <?php if(isset($_SESSION["user_id"])): ?>
             <a href="<?= PROJECT_FOLDER ?>jouer.php" class="button" id="jouer">Jouer</a>
         <?php endif; ?>

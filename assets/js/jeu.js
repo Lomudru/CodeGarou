@@ -100,7 +100,7 @@ cluster: 'eu'
 let channelGame = pusher.subscribe(code.innerText);
 if(lauch != null){
     lauch.addEventListener("click", ()=>{
-        if(allPlayer.childNodes.length >= 2 && allPlayer.childNodes.length <= 30){
+        if(allPlayer.childNodes.length >= 4 && allPlayer.childNodes.length <= 30){
             lauch.remove();
             let xmlhttp = new XMLHttpRequest();
             xmlhttp.open("get","action/jeu.php?key=cnuhdiaj3EJDHZIUAHIZ46826388634IE3886483&code="+code.innerText,true);
