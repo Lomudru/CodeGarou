@@ -1,4 +1,7 @@
 /*HEADER*/
+*{
+    font-family:"Roboto", sans-serif;
+}
 
 header {
     background-color: rgb(18, 86, 135);
@@ -17,6 +20,7 @@ body {
     display: flex;
     flex-direction: column;
     background-color: rgb(10, 46, 72);
+    overflow-x: hidden;
 }
 
 .main {
