@@ -1,0 +1,165 @@
+body{
+    background-color: #0A2E48;
+    font-family: "Roboto", sans-serif;
+    overflow: hidden;
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2vw 3vw;
+}
+header #lauch{
+    background-color: #FFB800;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 7vw;
+    padding: 1vw 0;
+    font-size: 1.2vw;
+    cursor: pointer;
+}
+header #codeHolder{
+    display: flex;
+    align-items: center;
+}
+header #codeHolder #code{
+    background-color: #755484;
+    color: white;
+    margin: 0;
+    padding: 1vw;
+    border-radius: 5px;
+    font-size: 1.2vw;
+    cursor: pointer;
+}
+header #codeHolder i{
+    font-size: 2vw;
+    color: #755484;
+    margin-left: 1vw;
+    cursor: pointer;
+}
+header #quitter{
+    text-transform: uppercase;
+    text-decoration: none;
+    color: white;
+    background-color: #FF0000;
+    padding: 1vw;
+    border-radius: 5px;
+}
+main {
+    display: flex;
+    justify-content: space-evenly;
+}
+main > div:first-of-type{
+    width: 70vw;
+}
+main > div:first-of-type #listPlayer{
+    color: white;
+    display: flex;
+    flex-wrap: wrap;
+    height: 40vh;
+}
+main > div:first-of-type #listPlayer p{
+    flex: 1 0 17%;
+    margin: 0;
+    text-align: center;
+}
+main > div:first-of-type #allActionHolder{
+    height: 50vh;
+    background-color: #466378;
+    border-radius: 10px 10px 0 0;
+}
+
+main > div:first-of-type #allActionHolder > div:first-of-type{
+    border-radius: 10px 10px 0 0;
+    background-color: #354B5B;
+}
+main > div:first-of-type #allActionHolder > div:first-of-type p{
+    color: white;
+    margin: 0;
+    padding: 0.5vw 1vw;
+}
+main > div:first-of-type #allActionHolder > #allAction{
+    width: 100%;
+    height: -webkit-fill-available;
+    display: flex;
+    flex-direction: column-reverse;
+    color: white;
+    overflow: scroll;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    padding: 0 0 5vw 2vw;
+}
+
+main > div:last-of-type{
+    background-color: #466378;
+    width: 25vw;
+    height: 100vh;
+    border-radius: 50px 50px 0 0;
+}
+main > div:last-of-type > i{
+    color: #0A2E48;
+    font-size: 3vw;
+    margin: 1vw 0 0 3vw;
+    cursor: pointer;
+}
+main > div:last-of-type > p:first-of-type{
+    color: white;
+    font-size: 2vw;
+    margin: 0 0 1vw;
+    text-align: center;
+}
+main > div:last-of-type > #chat{
+    background-color: #65849A;
+    width: 80%;
+    margin: 0 auto;
+    color: white;
+    padding: 1vw;
+    height: 50vh;
+    border-radius: 10px;
+    overflow: scroll;
+    overflow-x: hidden;
+    scrollbar-width: none;
+}
+main > div:last-of-type > div:last-of-type{
+    width: 88%;
+    margin: 1vw auto 0;
+}
+main > div:last-of-type > div:last-of-type input{
+    background-color: #65849A;
+    border: none;
+    font-size: 1.2vw;
+    color: white;
+    padding: 0.5vw;
+    border-radius: 5px;
+    width: 80%;
+    margin-right: 5%;
+
+}
+main > div:last-of-type > div:last-of-type input::placeholder{
+    color: white;
+    font-size: 1.2vw;
+}
+main > div:last-of-type > div:last-of-type input:focus{
+    outline: none;
+}
+main > div:last-of-type > div:last-of-type i{
+    color: #65849A;
+    cursor: pointer;
+    font-size: 1.5vw;
+}
+
+.hidden{
+    display: none;
+}
+#roleZone{
+    color: white;
+    margin: 0;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 1.5vw;
+}
+.small{
+    position: relative;
+    top: 75vh;
+}

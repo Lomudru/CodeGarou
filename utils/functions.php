@@ -433,7 +433,7 @@ function Prochain_role($room){
         AND R.role_ordre > (
             SELECT R.role_ordre FROM role AS R
             INNER JOIN room AS M ON R.role_id = M.room_id_role_actuelle
-            WHERE R.role_id = M.room_id_role_actuelle)
+            WHERE R.role_id = M.room_id_role_actuelle AND M.room_code = :code)
         ORDER BY R.role_ordre ASC
         LIMIT 1;");
     $pdoStatement->execute([

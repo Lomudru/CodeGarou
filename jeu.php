@@ -18,9 +18,9 @@ $spectator = false;
 <!DOCTYPE html>
 <html lang="fr">
 <?php require SITE_ROOT . "partials/head.php" ?>
+<link rel="stylesheet" href="<?= PROJECT_FOLDER ?>assets/css/jeu.css">
 <body>
     <?php if(isset($_GET["code"]) && isset($_SESSION["user_id"])): ?>
-        <p id="code"><?= $_GET["code"] ?></p>
         <?php 
             $pdo = connectToDbAndGetPdo();
             $pdoStatement = $pdo->prepare("SELECT R.room_code, R.room_en_jeu, R.room_nbr_max, COUNT(P.joueur_id) AS nbr_actuel FROM room AS R INNER JOIN partie AS P ON R.room_code = P.room_code WHERE R.room_code = :code;");
@@ -39,38 +39,87 @@ $spectator = false;
                     $_SESSION["last_room_code"] = $verif_partie->room_code;
                 }
             endif;
-            ?>
+        ?>
+        <?php
+        $result = Select_Partie($_GET["code"],$_SESSION["user_id"]);
+        if ($result != false){
+            $spectator = true;
+        }
+        $en_jeu = Select_Room(false,$_GET["code"])[0];
+        ?>
+        <header>
+            <div>
+            <?php if ($spectator && $en_jeu->room_en_jeu != 1):?>
+                <button id="lauch">Jouer</button>
+                <p id="roleZone" class="hidden">Role</p>
+            <?php elseif($spectator): ?>
+                <p id="roleZone" class="hidden">Role</p>
+            <?php endif;?>
+            </div>
+            <div id="codeHolder">
+                <p id="code" onclick="copyText(this)"><?= $_GET["code"] ?></p>
+                <i class="fa-solid fa-eye-slash" id="hideCode"></i>
+            </div>
+            <a id="quitter" href="<?= PROJECT_FOLDER ?>jouer.php">Quitter</a>
+        </header>
     <?php else:
         header("Location: ".PROJECT_FOLDER."jouer.php");
     endif;
     ?>
-    <?php
-    $result = Select_Partie($_GET["code"],$_SESSION["user_id"]);
-    if ($result != false){
-        $spectator = true;
-    }
-    $en_jeu = Select_Room(false,$_GET["code"])[0];
     
-
-
-    ?>
     <main>
-        <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
-        <?php if ($spectator && $en_jeu->room_en_jeu != 1):?>
-            <button id="lauch">Jouer</button>
-        <?php endif;?>
-        <h2>Player</h2>
-        <div id="listPlayer"></div>
-        <h2>Chat</h2>
-        <div id="chat"></div>
+        <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>     
+        <div>
+            <div id="listPlayer"></div>
+            <div id="allActionHolder">
+                <div>
+                    <p>Deroulement du jeu</p>
+                </div>
+                <div id="allAction"></div>
+            </div>
+        </div>
+        <div id="chatHolder">
+            <i class="fa-solid fa-caret-down" id="hideChat"></i>
+            <p>Message</p>
+            <div id="chat"></div>
             <?php if ($spectator):?>
-                <input type="text" placeholder="Message" name="chatBox" id="chatBox">
+                <div>
+                    <input type="text" placeholder="Votre message" name="chatBox" id="chatBox">
+                    <i class="fa-solid fa-paper-plane" id="submit"></i>
+                </div>
             <?php endif;?>
-        <a href="<?= PROJECT_FOLDER ?>jouer.php">Quitter</a>
+        </div>
     </main>
     <script src="<?= PROJECT_FOLDER ?>assets/js/jeu.js"></script>
     <script>
         let sessionId = <?= $_SESSION["user_id"]; ?>;
+        function copyText(element) {
+            // Access the innerText of the element
+            var textToCopy = element.innerText;
+
+            // Attempt to use the Clipboard API
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(textToCopy)
+                .then(function() {
+                    // Optionally, you can give feedback to the user
+                    alert('Text copied to clipboard: ' + textToCopy);
+                })
+                .catch(function(error) {
+                    console.error('Failed to copy text: ', error);
+                });
+            } else {
+                // Fallback: Create a temporary textarea to copy the text
+                var textarea = document.createElement('textarea');
+                textarea.value = textToCopy;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+
+                // Optionally, you can give feedback to the user
+                alert('Text copied to clipboard: ' + textToCopy);
+            }
+            }
     </script>
     <script src="<?= PROJECT_FOLDER ?>assets/js/codeGarou.js"></script>
 </body>
