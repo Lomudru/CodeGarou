@@ -2,6 +2,7 @@
 <header>
     <?php 
     require 'vendor/autoload.php';
+    require 'utils/functions.php';
     $options = array(
         'cluster' => 'eu',
         'useTLS' => true
@@ -32,11 +33,25 @@
     <?php 
     if(isset($_SESSION["user_id"]) && $_SERVER['PHP_SELF'] != "/CodeGarou/jeu.php"  && $_SERVER['PHP_SELF'] != "/CodeGarou/action/createRoom.php"){
         $pdo = connectToDbAndGetPdo();
+        $pdoStatement = $pdo->prepare("SELECT room_code from partie WHERE joueur_id = :id");
+        $pdoStatement->execute([
+            ":id" => $_SESSION["user_id"]
+        ]);
+        $result=$pdoStatement->fetch();
         $pdoStatement = $pdo->prepare("DELETE FROM partie WHERE joueur_id = :id");
         $pdoStatement->execute([
             ":id" => $_SESSION["user_id"]
         ]);
-        $result = $pdoStatement->fetchAll();
+        if($result){
+            $room = Select_Room(false,$result->room_code)[0];
+            $data["room_code"] = $result->room_code;
+            $data["room_nom"] = $room->room_nom;
+            $data["nbr_max"] = $room->room_nbr_max;
+            $data["visibility"] = $room->room_visibilite;
+            $data["nbr_joueur"] = playeringame($result->room_code)->nbr_joueur;
+            $pusher->trigger("Channel_room", 'room', $data);
+        }
+        
         if(isset($_SESSION["last_room_code"])){
             $data["user_pseudo"] = $_SESSION["user_pseudo"];
             $data["disconnect"] = true;

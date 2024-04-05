@@ -23,7 +23,7 @@ $spectator = false;
     <?php if(isset($_GET["code"]) && isset($_SESSION["user_id"])): ?>
         <?php 
             $pdo = connectToDbAndGetPdo();
-            $pdoStatement = $pdo->prepare("SELECT R.room_code, R.room_en_jeu, R.room_nbr_max, COUNT(P.joueur_id) AS nbr_actuel FROM room AS R INNER JOIN partie AS P ON R.room_code = P.room_code WHERE R.room_code = :code;");
+            $pdoStatement = $pdo->prepare("SELECT R.room_code, R.room_nom, R.room_en_jeu, R.room_visibilite, R.room_nbr_max, COUNT(P.joueur_id) AS nbr_actuel FROM room AS R INNER JOIN partie AS P ON R.room_code = P.room_code WHERE R.room_code = :code;");
             $pdoStatement->execute([
                 ":code" => $_GET["code"],
             ]);
@@ -36,6 +36,14 @@ $spectator = false;
                     Insert_Partie($verif_partie->room_code,$_SESSION["user_id"]);
                     $data['user_pseudo'] = $_SESSION["user_pseudo"];
                     $pusher->trigger($verif_partie->room_code, 'player', $data);
+
+                    $data["room_code"] = $verif_partie->room_code;
+                    $data["room_nom"] = $verif_partie->room_nom;
+                    $data["nbr_max"] = $verif_partie->room_nbr_max;
+                    $data["visibility"] = $verif_partie->room_visibilite;
+                    $data["nbr_joueur"] = $verif_partie->nbr_actuel+1;
+                    $pusher->trigger("Channel_room", 'room', $data);
+
                     $_SESSION["last_room_code"] = $verif_partie->room_code;
                 }
             endif;

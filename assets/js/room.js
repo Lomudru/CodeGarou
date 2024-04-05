@@ -37,7 +37,12 @@ channelRoom.bind('room', function(data) {
         }
     }
     else if(data["visibility"] == 1 && data["delete"] == undefined){
-        allRoom.innerHTML += "<a id='"+ data["room_code"] +"' href='jeu.php?code="+ data["room_code"] +"'>"+ data["room_nom"] + " : nombre de joueur max " + data["nbr_max"] + "</a>";
+        for(let i = 0; i < allRoom.childNodes.length; i++){
+            if(allRoom.childNodes[i].id == data["room_code"]){
+                allRoom.childNodes[i].remove();
+            }
+        }
+        allRoom.innerHTML += "<a id='"+ data["room_code"] +"' href='jeu.php?code="+ data["room_code"] +"'>"+ data["room_nom"] + " : "+data["nbr_joueur"]+"/" + data["nbr_max"] + "</a>";
     }
 });
 rechercheRoom.childNodes[1].addEventListener("keyup",()=>{

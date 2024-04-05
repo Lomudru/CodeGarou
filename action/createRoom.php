@@ -33,6 +33,7 @@ if (!empty($_POST)){
     $data["room_nom"] = $_POST["nom"];
     $data["nbr_max"] = $_POST["nbr_joueur_max"];
     $data["visibility"] = $_POST["visibilite"];
+    $data["nbr_joueur"] = playeringame($code)->nbr_joueur+1;
 
     $pusher->trigger("Channel_room", 'room', $data);
 
