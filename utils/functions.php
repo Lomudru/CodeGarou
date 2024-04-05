@@ -490,3 +490,12 @@ function victoire($room){
         return $areturn[0];
     }
 }
+
+function playeringame($room){
+    $pdo = connectToDbAndGetPdo();
+    $pdoStatement = $pdo->prepare("SELECT COUNT(joueur_id) AS nbr_joueur FROM partie WHERE room_code = :code;");
+    $pdoStatement->execute([
+        ":code" => $room
+    ]);
+    return $pdoStatement->fetch();
+}

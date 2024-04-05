@@ -23,6 +23,7 @@ if(isset($_GET["key"]) && $_GET["key"] == "cnuhdiaj3EJDHZIUAHIZ46826388634IE3886
             $data["delete"] = true;
             $pusher->trigger("Channel_room", 'room', $data);
         }
+        $row->nbr_joueur = playeringame($row->room_code)->nbr_joueur;
     }
     echo json_encode($room);
 }else{

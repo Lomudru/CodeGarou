@@ -7,10 +7,11 @@ function updateRoom(){
     xmlhttp.onreadystatechange = function(){
         if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
             allRoom.innerHTML = "";
+            console.log(this.response)
             let reponse = JSON.parse(this.response);
             reponse.forEach(element => {
                 if(element["room_visibilite"] == 1 && element["room_en_jeu"] == 0){
-                    allRoom.innerHTML += "<a id='"+ element["room_code"] +"' href='jeu.php?code="+ element["room_code"] +"'>"+ element["room_nom"] + " : nombre de joueur max " + element["room_nbr_max"] + "</a>";
+                    allRoom.innerHTML += "<a id='"+ element["room_code"] +"' href='jeu.php?code="+ element["room_code"] +"'>"+ element["room_nom"] + " : " + element["nbr_joueur"] + "/" + element["room_nbr_max"] + "</a>";
                 }
             });
         }
