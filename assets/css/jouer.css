@@ -34,13 +34,13 @@ html{
 }
 #allRoom{
     background-color: #D9D9D975;
-    margin-top: 5vw;
+    margin-top: 3vw;
     border-radius: 25px;
     overflow-y: scroll;
     scrollbar-width: none;
     margin-left: 1vw;
     margin-right: 1vw;
-    height: 15vw;
+    height: 17vw;
     padding: 1%;
     padding-left: 2%;
     font-size: 1.5vw;

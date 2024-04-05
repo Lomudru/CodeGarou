@@ -108,8 +108,12 @@ footer {
     border-radius: 25px;
     color: white;
     border: 0;
+    text-decoration: none;
 }
 
 .button:hover {
     background-color: rgba(117, 84, 132, 0.8); /* Changement de couleur au survol */
+}
+h1{
+    margin: 0.67em 4vw;
 }
