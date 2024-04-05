@@ -16,7 +16,7 @@ if(isset($_GET["code"])){
     <?php require SITE_ROOT . "partials/header.php" ?>
     <main>
         <?php if(isset($_GET["error"])): ?>
-            <p class="codeInccorect">Le code est inccorect</p>
+            <p class="codeInccorect">Le code est incorrect</p>
         <?php endif; ?>
         <div id="formall">
             <div class="form" id="creationRoom">

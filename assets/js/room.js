@@ -1,3 +1,4 @@
+
 let allRoom = document.getElementById("allRoom"),
     rechercheRoom = document.getElementById("search");
 
@@ -45,8 +46,9 @@ channelRoom.bind('room', function(data) {
         allRoom.innerHTML += "<a id='"+ data["room_code"] +"' href='jeu.php?code="+ data["room_code"] +"'>"+ data["room_nom"] + " : "+data["nbr_joueur"]+"/" + data["nbr_max"] + "</a>";
     }
 });
-rechercheRoom.childNodes[1].addEventListener("keyup",()=>{
-    if(rechercheRoom.childNodes[1].value.length >= 5){
+console.log(rechercheRoom.childNodes[3]);
+rechercheRoom.childNodes[3].addEventListener("keyup",()=>{
+    if(rechercheRoom.childNodes[3].value.length >= 5){
         rechercheRoom.submit();
     }
 })
